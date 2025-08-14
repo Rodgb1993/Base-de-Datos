@@ -1,0 +1,3 @@
+create database NUEVA_BASE
+use NUEVA_BASE
+create table Clase_01
