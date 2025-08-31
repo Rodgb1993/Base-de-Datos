@@ -1,0 +1,35 @@
+CREATE TABLE Categorias (
+    id_categoria INT PRIMARY KEY,
+    nombre_categoria VARCHAR(100)
+);
+
+CREATE TABLE Productos (
+    id_producto INT PRIMARY KEY,
+    nombre_producto VARCHAR(100),
+    precio DECIMAL(10,2),
+    id_categoria INT,
+    FOREIGN KEY (id_categoria) REFERENCES Categorias(id_categoria)
+);
+
+INSERT INTO Categorias (id_categoria, nombre_categoria) VALUES
+(1, 'Electronica'),
+(2, 'Ropa'),
+(3, 'Alimentos');
+
+INSERT INTO Productos (id_producto, nombre_producto, precio, id_categoria) VALUES
+(101, 'Televisor', 599.99, 1),
+(102, 'Pantalon', 39.90, 2),
+(103, 'Manzanas', 3.50, 3),
+(104, 'Camara', 299.99, 1);
+
+--Ordenar productos por precio (de menor a mayor)
+SELECT * FROM Productos
+ORDER BY precio DESC;
+
+--Ordenar productos por precio (de mayor a menor)
+SELECT * FROM Productos
+ORDER BY precio DESC;
+
+--Ordenar productos por nombre alfabéticamente
+SELECT * FROM Productos
+ORDER BY nombre_producto ASC;
