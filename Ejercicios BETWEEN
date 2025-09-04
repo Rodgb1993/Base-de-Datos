@@ -1,0 +1,24 @@
+CREATE TABLE Empleado (
+    id INT PRIMARY KEY,
+    nombre VARCHAR(50),
+    salario DECIMAL(10,2),
+    fecha_ingreso DATE
+);
+
+INSERT INTO Empleados (id, nombre, salario, fecha_ingreso) VALUES
+(1, 'Ana',   1200, '2022-01-15'),
+(2, 'Luis',  1800, '2022-02-10'),
+(3, 'Marta', 2500, '2022-03-20'),
+(4, 'Pedro', 3000, '2022-04-25'),
+(5, 'Juan',  4000, '2022-05-30'),
+(6, 'Lucía', 2200, '2022-06-12');
+
+--Sueldos dentro de un rango
+SELECT nombre, salario
+FROM Empleado
+WHERE salario BETWEEN 2000 AND 3500;
+
+--Nombres 
+SELECT nombre
+FROM Empleados
+WHERE nombre BETWEEN 'L' AND 'P';
