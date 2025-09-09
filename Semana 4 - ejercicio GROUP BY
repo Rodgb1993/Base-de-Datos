@@ -1,0 +1,41 @@
+CREATE TABLE Departamentos (
+    departamento_id INT PRIMARY KEY,
+    nombre_departamento VARCHAR(50)
+);
+
+INSERT INTO Departamentos (departamento_id, nombre_departamento) VALUES
+(1, 'Ventas'),
+(2, 'Marketing'),
+(3, 'IT'),
+(4, 'Recursos Humanos');
+
+CREATE TABLE Empleados (
+    empleado_id INT PRIMARY KEY,
+    nombre VARCHAR(50),
+    salario DECIMAL(10, 2),
+    departamento_id INT,
+    FOREIGN KEY (departamento_id) REFERENCES Departamentos(departamento_id)
+);
+
+INSERT INTO Empleados (empleado_id, nombre, salario, departamento_id) VALUES
+(101, 'Ana García', 50000.00, 1),
+(102, 'Luis Pérez', 55000.00, 1),
+(103, 'María López', 60000.00, 2),
+(104, 'Carlos Ruiz', 70000.00, 3),
+(105, 'Sofía Martín', 52000.00, 1),
+(106, 'David Fernández', 65000.00, 2),
+(107, 'Laura Gómez', 75000.00, 3),
+(108, 'Pedro Sánchez', 48000.00, 4);
+
+SELECT
+    d.nombre_departamento,
+    COUNT(e.empleado_id) AS numero_de_empleados,
+    AVG(e.salario) AS salario_promedio
+FROM
+    Empleados e
+JOIN
+    Departamentos d ON e.departamento_id = d.departamento_id
+GROUP BY
+    d.nombre_departamento
+ORDER BY
+    d.nombre_departamento;
