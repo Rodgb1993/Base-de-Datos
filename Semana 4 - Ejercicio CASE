@@ -1,0 +1,42 @@
+CREATE TABLE Estudiantes (
+    EstudianteID INT PRIMARY KEY,
+    Nombre VARCHAR(50),
+    Apellido VARCHAR(50)
+);
+
+CREATE TABLE Calificaciones (
+    CalificacionID INT PRIMARY KEY,
+    EstudianteID INT,
+    NombreCurso VARCHAR(50),
+    Puntaje INT,
+    FOREIGN KEY (EstudianteID) REFERENCES Estudiantes(EstudianteID)
+);
+
+INSERT INTO Estudiantes (EstudianteID, Nombre, Apellido) VALUES
+(1, 'Juan', 'Perez'),
+(2, 'Maria', 'Gomez'),
+(3, 'Carlos', 'Lopez');
+
+
+INSERT INTO Calificaciones (CalificacionID, EstudianteID, NombreCurso, Puntaje) VALUES
+(101, 1, 'Matematicas', 85),
+(102, 1, 'Historia', 92),
+(103, 2, 'Ciencias', 78),
+(104, 2, 'Lenguaje', 65),
+(105, 3, 'Matematicas', 90);
+
+SELECT
+    e.Nombre,
+    e.Apellido,
+    c.NombreCurso,
+    c.Puntaje,
+    CASE
+        WHEN c.Puntaje >= 70 THEN 'Aprobado'
+        ELSE 'Reprobado'
+    END AS Estado
+FROM
+    Estudiantes e
+JOIN
+    Calificaciones c ON e.EstudianteID = c.EstudianteID
+ORDER BY
+    e.Apellido, e.Nombre, c.NombreCurso;
