@@ -1,0 +1,52 @@
+CREATE TABLE Empleados (
+    empleado_id INT PRIMARY KEY,
+    nombre VARCHAR(50),
+    departamento VARCHAR(50)
+);
+
+CREATE TABLE Proyectos (
+    proyecto_id INT PRIMARY KEY,
+    nombre_proyecto VARCHAR(100),
+    empleado_id INT,
+    FOREIGN KEY (empleado_id) REFERENCES Empleados(empleado_id)
+);
+
+INSERT INTO Empleados (empleado_id, nombre, departamento) VALUES
+(1, 'Ana Lopez', 'Ventas'),
+(2, 'Carlos Ruiz', 'IT'),
+(3, 'Marta Gomez', 'IT'),
+(4, 'Pedro Sanz', 'Marketing'),
+(5, 'Laura Diaz', 'Ventas');
+
+INSERT INTO Proyectos (proyecto_id, nombre_proyecto, empleado_id) VALUES
+(101, 'Desarrollo Web', 2),
+(102, 'Campana Publicitaria', 4),
+(103, 'Soporte de Redes', 2),
+(104, 'Analisis de Mercado', 4),
+(105, 'Reorganizacion de Ventas', 1);
+
+--Empleados que tienen proyectos asignados
+SELECT
+    E.nombre,
+    P.nombre_proyecto
+FROM
+    Empleados AS E
+INNER JOIN
+    Proyectos AS P
+ON
+    E.empleado_id = P.empleado_id;
+    
+--  Contar la cantidad de proyectos por empleado
+SELECT
+    E.nombre,
+    COUNT(P.proyecto_id) AS numero_de_proyectos
+FROM
+    Empleados AS E
+LEFT JOIN
+    Proyectos AS P
+ON
+    E.empleado_id = P.empleado_id
+GROUP BY
+    E.nombre
+ORDER BY
+    numero_de_proyectos DESC;
