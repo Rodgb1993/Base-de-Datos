@@ -1,0 +1,30 @@
+CREATE TABLE colores (
+    id_color INT PRIMARY KEY,
+    nombre_color VARCHAR(50)
+);
+
+INSERT INTO colores (id_color, nombre_color) VALUES
+(1, 'Rojo'),
+(2, 'Azul'),
+(3, 'Verde');
+
+CREATE TABLE tallas (
+    id_talla INT PRIMARY KEY,
+    nombre_talla VARCHAR(50)
+);
+
+
+INSERT INTO tallas (id_talla, nombre_talla) VALUES
+(10, 'XS'),
+(20, 'S'),
+(30, 'M'),
+(40, 'L'),
+(50, 'XL');
+
+SELECT
+    c.nombre_color,
+    t.nombre_talla
+FROM
+    colores c
+CROSS JOIN
+    tallas t;
