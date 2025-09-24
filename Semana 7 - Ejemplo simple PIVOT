@@ -1,0 +1,29 @@
+CREATE TABLE VentasDiarias (
+    Producto NVARCHAR(50),
+    Mes NVARCHAR(20),
+    CantidadVendida INT
+);
+
+INSERT INTO VentasDiarias (Producto, Mes, CantidadVendida) VALUES
+('Laptop', 'Enero', 10),
+('Mouse', 'Enero', 25),
+('Laptop', 'Febrero', 15),
+('Mouse', 'Febrero', 30),
+('Laptop', 'Marzo', 20),
+('Mouse', 'Marzo', 28),
+('Teclado', 'Enero', 12),
+('Teclado', 'Febrero', 18),
+('Teclado', 'Marzo', 22);
+
+SELECT
+    Producto,
+    [Enero],
+    [Febrero],
+    [Marzo]
+FROM
+    (SELECT Producto, Mes, CantidadVendida FROM VentasDiarias) AS SourceTable
+PIVOT
+    (
+        SUM(CantidadVendida)
+        FOR Mes IN ([Enero], [Febrero], [Marzo])
+    ) AS PivotTable;
