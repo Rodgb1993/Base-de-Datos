@@ -1,0 +1,29 @@
+CREATE TABLE Calificaciones (
+    Estudiante VARCHAR(50),
+    Materia VARCHAR(50),
+    Nota INT
+);
+
+INSERT INTO Calificaciones VALUES
+('Laura', 'Matemáticas', 85),
+('Laura', 'Historia', 90),
+('Laura', 'Física', 78),
+('Carlos', 'Matemáticas', 88),
+('Carlos', 'Historia', 92),
+('Carlos', 'Física', 81),
+('Marta', 'Matemáticas', 95),
+('Marta', 'Historia', 85),
+('Marta', 'Física', 89);
+
+SELECT
+    Estudiante,
+    [Matemáticas],
+    [Historia],
+    [Física]
+FROM
+    Calificaciones
+PIVOT
+(
+    MAX(Nota)
+    FOR Materia IN ([Matemáticas], [Historia], [Física])
+) AS PivotCalificaciones;
