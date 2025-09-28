@@ -1,0 +1,54 @@
+CREATE TABLE Empleados (
+    ID INT PRIMARY KEY,
+    Departamento VARCHAR(50) NOT NULL,
+    Salario DECIMAL(10, 2) NOT NULL,
+    -- Columna donde guardaremos el resultado de la función de ventana
+    Posicion_Salarial_Dept INT  
+);
+
+-- Insertamos algunos datos de ejemplo
+INSERT INTO Empleados (ID, Departamento, Salario, Posicion_Salarial_Dept) VALUES
+(1, 'Ventas', 55000.00, NULL),
+(2, 'IT', 72000.00, NULL),
+(3, 'Ventas', 60000.00, NULL),
+(4, 'IT', 68000.00, NULL),
+(5, 'Marketing', 65000.00, NULL);
+
+
+---
+-- ******************************************************
+-- PASO 2: EL COMANDO UPDATE CON FUNCIÓN DE VENTANA (CTE)
+-- ******************************************************
+
+
+WITH Calculo_Ranking AS (
+    SELECT
+        ID,
+        -- Usamos DENSE_RANK() para calcular la posición salarial:
+        DENSE_RANK() OVER (
+            -- PARTITION BY: Divide los datos por Departamento. El ranking se reinicia para cada uno.
+            PARTITION BY Departamento 
+            -- ORDER BY: Ordena por Salario descendente (el más alto es la posición 1).
+            ORDER BY Salario DESC
+        ) AS Ranking
+    FROM
+        Empleados
+)
+
+UPDATE Empleados
+SET Posicion_Salarial_Dept = CR.Ranking  -- Asignamos el valor 'Ranking' de la CTE
+
+FROM Calculo_Ranking CR
+WHERE Empleados.ID = CR.ID;
+
+
+SELECT 
+    ID, 
+    Departamento, 
+    Salario, 
+    Posicion_Salarial_Dept 
+FROM 
+    Empleados 
+ORDER BY 
+    Departamento, 
+    Posicion_Salarial_Dept;
