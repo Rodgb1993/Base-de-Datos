@@ -1,0 +1,20 @@
+CREATE TABLE Articulos (
+    ID_Articulo INT PRIMARY KEY,
+    Nombre VARCHAR(50) NOT NULL,
+    Precio DECIMAL(10, 2)
+);
+
+INSERT INTO Articulos (ID_Articulo, Nombre, Precio)
+VALUES (1, 'Taza de Café', 10.50);
+
+SELECT * FROM Articulos;
+
+BEGIN TRANSACTION;
+
+VALUES (2, 'Libreta A5', 5.99);
+
+SELECT * FROM Articulos;
+
+COMMIT;
+
+SELECT * FROM Articulos;
