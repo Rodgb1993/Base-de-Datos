@@ -1,0 +1,7 @@
+SELECT
+    H.SalesOrderID,
+    PC.Name AS NombreCategoria
+FROM
+    Sales.SalesOrderHeader AS H
+CROSS JOIN
+    Production.ProductCategory AS PC;
