@@ -1,0 +1,14 @@
+-- INNER JOIN
+SELECT C.Nombre, P.FechaPedido
+FROM Clientes C
+INNER JOIN Pedidos P ON C.ClienteID = P.ClienteID;
+
+--LEFT JOIN
+SELECT C.Nombre, P.FechaPedido
+FROM Clientes C
+LEFT JOIN Pedidos P ON C.ClienteID = P.ClienteID;
+
+--RIGHT JOIN
+SELECT C.Nombre, P.FechaPedido
+FROM Clientes C
+RIGHT JOIN Pedidos P ON C.ClienteID = P.ClienteID;
