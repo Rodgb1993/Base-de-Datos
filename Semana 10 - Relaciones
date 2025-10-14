@@ -1,0 +1,10 @@
+SELECT
+    C.Name AS ProductCategory,  
+    S.Name AS ProductSubcategory 
+FROM
+    Production.ProductCategory AS C
+INNER JOIN
+    Production.ProductSubcategory AS S
+    ON C.ProductCategoryID = S.ProductCategoryID 
+ORDER BY
+    C.Name, S.Name;
