@@ -1,0 +1,12 @@
+SELECT
+    Customer.CustomerID,
+    Customer.StoreID,          -- ID de la Tabla "Uno" (Clientes)
+    SalesOrderHeader.SalesOrderID,  -- ID de la Tabla "Muchos" (Órdenes)
+    SalesOrderHeader.OrderDate     -- Fecha de la Orden
+FROM
+    Sales.Customer AS Customer -- La Tabla "Uno"
+INNER JOIN
+    Sales.SalesOrderHeader AS SalesOrderHeader -- La Tabla "Muchos"
+    ON Customer.CustomerID = SalesOrderHeader.CustomerID -- La condición de unión
+ORDER BY
+    Customer.CustomerID
