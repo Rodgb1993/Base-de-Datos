@@ -1,0 +1,10 @@
+-- Consulta SQL utilizando CROSS JOIN (Producto Cartesiano)
+-- Combina CADA Departamento con CADA Unidad de Medida.
+SELECT
+    D.Name AS DepartmentName,
+    U.Name AS UnitMeasureName
+FROM
+    HumanResources.Department AS D -- Tabla 1
+CROSS JOIN
+    Production.UnitMeasure AS U;    -- Tabla 2
+GO
