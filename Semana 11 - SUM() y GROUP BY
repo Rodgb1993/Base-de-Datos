@@ -1,0 +1,17 @@
+Teoría: Funciones Agregadas (SUM) y GROUP BY
+SUM(): Esta función agregada se utiliza para calcular la suma total 
+de los valores de una columna numérica dentro de un grupo de filas.
+
+GROUP BY: Se usa para agrupar filas que tienen el mismo valor en una o más 
+columnas especificadas (en este caso, TerritoryID). La función SUM() se aplicará a cada grupo, 
+dándonos el total de ventas por territorio.
+
+SELECT 
+    TerritoryID,
+    SUM(SubTotal) AS TotalVentas
+FROM 
+    Sales.SalesOrderHeader
+GROUP BY 
+    TerritoryID
+ORDER BY 
+    TotalVentas DESC;
