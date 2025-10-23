@@ -1,0 +1,25 @@
+AVG(): Calcula el promedio (media aritmética) de una columna numérica. 
+Útil para conocer el valor promedio de las órdenes de venta o el precio promedio de un producto.
+
+MAX() / MIN(): Devuelven el valor más alto y más bajo, respectivamente, de una columna dentro de cada grupo.
+
+JOINs: Para acceder a información de diferentes tablas (como los nombres de las categorías), 
+necesitamos usar INNER JOIN para unir las tablas a través de sus claves (IDs).
+
+
+
+-- Tablas: Production.Product, Production.ProductSubcategory, Production.ProductCategory
+
+SELECT 
+    PC.Name AS Categoria,
+    AVG(P.ListPrice) AS PrecioPromedio,
+    MAX(P.ListPrice) AS PrecioMaximo,
+    MIN(P.ListPrice) AS PrecioMinimo
+FROM 
+    Production.Product P
+INNER JOIN 
+    Production.ProductSubcategory PSC ON P.ProductSubcategoryID = PSC.ProductSubcategoryID
+INNER JOIN 
+    Production.ProductCategory PC ON PSC.ProductCategoryID = PC.ProductCategoryID
+GROUP BY 
+    PC.Name;
