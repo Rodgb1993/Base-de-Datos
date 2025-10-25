@@ -1,0 +1,19 @@
+Diferencia Clave: La cláusula WHERE filtra filas individuales antes del agrupamiento. 
+La cláusula HAVING filtra los grupos de resultados después de que el GROUP BY y las funciones agregadas se han ejecutado.
+
+Uso de HAVING: Es la única manera de aplicar una condición (un filtro) a un resultado de una función agregada. 
+En este caso, filtra el resultado de COUNT(SalesOrderID).
+--------------------------------------------------------------------------------------------------------------------
+SELECT 
+    SalesPersonID,
+    COUNT(SalesOrderID) AS TotalOrdenes
+FROM 
+    Sales.SalesOrderHeader
+WHERE 
+    SalesPersonID IS NOT NULL -- Asegura que solo contamos órdenes asignadas a un vendedor.
+GROUP BY 
+    SalesPersonID
+HAVING 
+    COUNT(SalesOrderID) > 300 -- HAVING filtra los grupos: solo muestra vendedores con más de 300 órdenes.
+ORDER BY 
+    TotalOrdenes DESC;
