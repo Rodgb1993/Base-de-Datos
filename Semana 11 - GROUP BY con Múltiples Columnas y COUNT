@@ -1,0 +1,22 @@
+COUNT(): Cuenta el número de filas que cumplen una condición o el número de valores no nulos en una columna. 
+Usamos COUNT(ProductID) para contar productos.
+
+GROUP BY con Múltiples Columnas: Al listar dos o más columnas en el GROUP BY (ej: Color, Size), la base de datos 
+crea un grupo por cada combinación única de valores. Esto permite análisis más detallados (ej: cuántos productos son "Rojo" y "48").
+
+Cláusula WHERE: Se usa para filtrar filas individuales antes de que ocurra el agrupamiento.
+
+SELECT 
+    Color, 
+    Size, 
+    COUNT(ProductID) AS CantidadProductos
+FROM 
+    Production.Product
+WHERE 
+    Color IS NOT NULL AND Size IS NOT NULL -- WHERE filtra las filas individuales sin valores nulos.
+GROUP BY 
+    Color, 
+    Size  -- Agrupa por cada combinación única de Color y Size.
+ORDER BY 
+    Color, 
+    CantidadProductos DESC;
