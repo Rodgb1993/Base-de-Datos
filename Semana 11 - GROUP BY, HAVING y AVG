@@ -1,0 +1,15 @@
+-- Tablas: Sales.SalesOrderHeader
+
+SELECT 
+    TerritoryID,
+    AVG(SubTotal) AS PromedioSubtotalOrden
+FROM 
+    Sales.SalesOrderHeader
+GROUP BY 
+    TerritoryID
+HAVING 
+    AVG(SubTotal) > 15000.00 -- Filtra los grupos: solo territorios donde la orden promedio supera los $15,000.
+ORDER BY 
+    PromedioSubtotalOrden DESC;
+
+-- Objetivo: Identificar los territorios donde las órdenes tienden a ser de alto valor.
